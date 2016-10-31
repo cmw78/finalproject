@@ -6,7 +6,7 @@ import forms
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
 app.config.from_object('config')
-#db = SQLAlchemy(app, session_options = {'autocommit': False})
+db = SQLAlchemy(app, session_options = {'autocommit': False})
 
 @app.route('/')
 def home():
