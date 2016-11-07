@@ -1,0 +1,342 @@
+/*
+Find courses Christina is taking
+*/
+select course.id, course.name from Course JOIN (select * from Taking, Student where 
+Taking.studentId = Student.id and Student.name = 'Christina') as T on T.courseId = Course.id;
+     id      |          name          
+-------------+------------------------
+ MATH 212    | MULTIVARIABLE CALCULUS
+ MUSIC 101-2 | CLASS VOICE
+ MATH 111L   | LABORATORY CALCULUS I
+(3 rows)
+
+/*
+Find courses bookbagged by Owen
+*/
+select course.id, course.name from Course JOIN (select * from Bookbag, Student where 
+Bookbag.studentId = Student.id and Student.name = 'Owen') as T on T.courseId = Course.id;
+     id     |            name            
+------------+----------------------------
+ EGR 201L   | MECHANICS OF SOLIDS
+ CHEM 101DL | CORE CONCEPTS IN CHEMISTRY
+(2 rows)
+
+-- Find courses with a net rating of at least 1 -- 
+SELECT Course.id 
+FROM Course, Taken
+WHERE Course.id = Taken.courseId
+GROUP BY Course.id
+HAVING SUM(rating) >= 1;
+      id      
+--------------
+ FRENCH 203
+ ECON 201D
+ EGR 224L
+ AMI 215S
+ COMPSCI 201
+ POLSCI 233
+ PHYSEDU 113
+ MUSIC 101-2
+ CHINESE 204
+ LINGUIST 201
+ EGR 201L
+ LINGUIST 202
+ ITALIAN 101
+ EVANTH 101
+ PHIL 101
+ AMI 210
+ PHYSEDU 101
+ ECON 101D
+ MATH 112L
+ ECON 373
+ POLSCI 201
+ SPANISH 203
+ GERMAN 204
+ MATH 212
+ POLISCI 233
+ POLISCI 201
+ RELIGION 263
+ AMI 215
+ ENGLISH 246
+ PHYSICS 142L
+ AAAS 103
+ GERMAN 102
+ ENGLISH 110S
+ PHYSEDU 170
+ POLSCI 101
+ GLHLTH 212
+ DOCST 281S
+ BIOLOGY 212L
+ SPANISH 102
+ GERMAN 101
+ AAAS 102
+ LINGUIST 364
+ ITALIAN 204
+(43 rows)
+
+-- Find courses taught by Rong Ge --
+SELECT Teaches.courseId 
+FROM Teaches, Professor
+WHERE Teaches.profId = Professor.id
+AND Professor.name = 'Rong Ge';
+   courseid   
+--------------
+ LINGUIST 201
+ GLHLTH 212
+ ITALIAN 101
+ PHIL 270
+ PHIL 150
+ FRENCH 101
+(6 rows)
+
+-- Find names of James' Friends who have taken LIT 274 --
+SELECT distinct(S2.name)
+FROM Student as S1, Student as S2, isFriendsWith, Taken
+WHERE S1.name = 'James' and S1.id = id1 and id2 = S2.id AND Taken.courseId = 'LIT 274' AND Taken.studentId = S2.id;
+  name  
+--------
+ Nevaeh
+(1 row)
+
+-- Find everyone who has bookbagged ORGANIC CHEMISTRY I--
+SELECT distinct(Student.name)
+FROM Student, Bookbag, Course
+WHERE Student.id = Bookbag.studentId and Course.id = Bookbag.courseId and Course.name = 'ORGANIC CHEMISTRY I';
+   name   
+----------
+ Landon
+ Hannah
+ Jace
+ Riley
+ Sophia
+ Scarlett
+ Summer
+(7 rows)
+
+--Find courses taught by Chad J Kuyper--
+SELECT course.name
+FROM Course, Professor, Teaches
+WHERE course.id = teaches.courseId AND Teaches.profId = Professor.id and Professor.name = 'Chad J Kuyper';
+           name           
+--------------------------
+ PUBLIC OPINION
+ ADV INTERMEDIATE ITALIAN
+ THE HUMAN BODY
+ LOGIC
+ DYNAMICS
+ FILM GENRES
+(6 rows)
+
+--Find ratings for all courses--
+SELECT SUM(rating), Taken.courseId
+FROM Taken
+GROUP BY Taken.courseId;
+ sum |   courseid   
+-----+--------------
+  -1 | CHEM 201DL
+   1 | FRENCH 203
+  -3 | CHINESE 205
+  -1 | MATH 216
+  -1 | CULANTH 101
+   0 | BME 271
+   0 | EVANTH 341
+   1 | ECON 201D
+   1 | EGR 224L
+   0 | AMI 101
+   0 | EVANTH 333L
+   0 | DOCST 101
+  -1 | PHYSEDU 104
+   1 | AMI 215S
+   0 | BIOLOGY 220
+  -1 | PHYSICS 141L
+   0 | CHINESE 102
+   1 | COMPSCI 201
+   0 | BIOLOGY 202L
+   1 | POLSCI 233
+  -1 | ITALIAN 203
+   1 | PHYSEDU 113
+   1 | MUSIC 101-2
+   1 | CHINESE 204
+   1 | LINGUIST 201
+  -3 | PHYSICS 134
+   1 | EGR 201L
+   0 | BME 301L
+   1 | LINGUIST 202
+   0 | EGR 244L
+   1 | ITALIAN 101
+   0 | RELIGION 101
+  -2 | COMPSCI 250D
+  -1 | COMPSCI 308
+   1 | EVANTH 101
+  -2 | FRENCH 101
+   1 | PHIL 101
+  -1 | SPANISH 301
+   0 | ITALIAN 102
+   0 | AAAS 213
+   1 | AMI 210
+   0 | MATH 353
+  -1 | CULANTH 104D
+   1 | PHYSEDU 101
+   0 | CHINESE 232
+   0 | BIOLOGY 201L
+   1 | ECON 101D
+   2 | MATH 112L
+  -1 | EVANTH 220
+   0 | MUSIC 101-1
+   1 | ECON 373
+  -1 | FRENCH 102
+   1 | POLSCI 201
+   1 | SPANISH 203
+   1 | GERMAN 204
+   0 | COMPSCI 330
+   0 | CULANTH 208
+   1 | MATH 212
+  -1 | SPANISH 101
+   1 | POLISCI 233
+   1 | POLISCI 201
+   1 | RELIGION 263
+   0 | POLISCI 101
+   0 | COMPSCI 316
+   1 | AMI 215
+  -2 | PHIL 150
+   0 | EGR 121L
+   1 | ENGLISH 246
+  -2 | CHEM 410
+   1 | PHYSICS 142L
+   2 | AAAS 103
+   1 | GERMAN 102
+   1 | ENGLISH 110S
+   2 | PHYSEDU 170
+   1 | POLSCI 101
+   2 | GLHLTH 212
+   0 | GERMAN 203
+   2 | DOCST 281S
+   1 | BIOLOGY 212L
+  -2 | GLHLTH 215
+   1 | SPANISH 102
+  -1 | MATH 111L
+   1 | GERMAN 101
+   0 | LIT 274
+   0 | CHEM 101DL
+   2 | AAAS 102
+   1 | LINGUIST 364
+  -1 | ECON 174
+  -1 | SPANISH 204
+   0 | FRENCH 204
+   1 | ITALIAN 204
+(91 rows)
+
+--Find ratings for all courses taught by Salman Azhar--
+SELECT SUM(rating), Taken.courseId
+FROM Taken, Professor, Teaches
+WHERE Teaches.profId = Professor.id and Professor.name = 'Salman Azhar' and Teaches.courseId = Taken.courseId
+GROUP BY Taken.courseId;
+ sum |  courseid   
+-----+-------------
+   1 | GERMAN 101
+  -3 | CHINESE 205
+   2 | ENGLISH 246
+   0 | AAAS 213
+(4 rows)
+
+--Find the highest rating given to each course taught by Alex Glass--
+SELECT MAX(rating), Taken.courseId
+FROM Taken, Professor, Teaches
+WHERE Teaches.profId = Professor.id and Professor.name = 'Alex Glass' and Teaches.courseId = Taken.courseId
+GROUP BY Taken.courseId;
+ max |  courseid   
+-----+-------------
+   1 | EVANTH 101
+   1 | AMI 215S
+   1 | PHYSEDU 113
+   1 | POLSCI 233
+(4 rows)
+
+--Find all of Dominic's Friends--
+SELECT distinct(S2.name)
+FROM Student as S1, Student as S2, isFriendsWith
+WHERE id1 = S1.id AND id2 = S2.id AND S1.name = 'Dominic';
+  name  
+--------
+ Ava
+ Sienna
+(2 rows)
+
+--Find all the courses bookbagged by Dominic's Friends--
+SELECT distinct Bookbag.courseId, Course.name
+FROM Student as S1, Student as S2, isFriendsWith, Bookbag, Course
+WHERE S1.name = 'Dominic' and S1.id=S2.id and S2.id = Bookbag.studentId and Course.id = Bookbag.courseId;
+   courseid   |           name           
+--------------+--------------------------
+ SPANISH 204  | ADV INTERMEDIATE SPANISH
+ SPANISH 203  | INTERMEDIATE SPANISH
+ ENGLISH 110S | INTRO CREATIVE WRITING
+ ITALIAN 101  | ELEMENTARY ITALIAN 1
+ AAAS 226     | CRIME AND THE CITY
+ BIOLOGY 202L | GENETICS AND EVOLUTION
+(6 rows)
+
+--Find netIDs and names of all students who have taken courses in Owen's bookbag--
+SELECT S2.id, S2.name
+FROM Student as S1, Student as S2, Bookbag, Taken
+WHERE S2.id = Taken.studentId and S1.name = 'Owen' and Bookbag.studentId = S1.id and Bookbag.courseId = Taken.courseId;
+  id   |  name   
+-------+---------
+ Jac60 | Jace
+ Jus83 | Justin
+ Add30 | Addison
+ Ann71 | Anna
+(4 rows)
+
+--Find netIDs and names of all students who have bookbagged the same courses as Owen--
+SELECT distinct S2.id, S2.name
+FROM Student as S1, Student as S2, Bookbag as B1, Bookbag as B2
+WHERE S1.id = B1.studentId and S2.id = B2.studentId and B1.courseId = B2.courseId and S1.name = 'Owen' AND S1.name>S2.name;
+  id   |    name     
+-------+-------------
+ All90 | Allison
+ Lil87 | Lillian
+ Mar82 | Maria
+ Aud34 | Audrey
+ Nor93 | Nora
+ Eli84 | Elise
+ Eve84 | Evelyn
+ Ant63 | Anthony
+ Mol26 | Molly
+ Chl89 | Chloe
+ Chr6  | Christopher
+ Lia95 | Liam
+ Abb34 | Abby
+ Ada15 | Adam
+(14 rows)
+
+--Find names of all courses Bookbagged by Owen--
+SELECT course.id
+FROM Course, Bookbag, Student
+WHERE Student.name = 'Owen' and Bookbag.courseId = Course.id and Bookbag.studentId = Student.id;
+     id     
+------------
+ EGR 201L
+ CHEM 101DL
+(2 rows)
+
+--Find names of all students who have bookbagged EGR 201L--
+SELECT Student.name
+FROM Bookbag, Student
+WHERE Bookbag.courseId = 'EGR 201L' and Bookbag.studentId = Student.id;
+    name     
+-------------
+ Owen
+ Allison
+ Christopher
+ Evelyn
+ Lillian
+ Maria
+ Molly
+ Nora
+ Abby
+ Adam
+ Violet
+ Anthony
+(12 rows)
+
