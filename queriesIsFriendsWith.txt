@@ -760,5 +760,5 @@ INSERT INTO IsFriendsWith VALUES('Add30', 'Bro63');
 INSERT INTO IsFriendsWith VALUES('Add30', 'Kai81');
 INSERT INTO IsFriendsWith VALUES('Add30', 'Mia0');
 INSERT INTO IsFriendsWith VALUES('Isa7', 'Mia0');
-INSERT INTO IsFriendsWith VALUES('Bro63', 'Kai81';)
+INSERT INTO IsFriendsWith VALUES('Bro63', 'Kai81');
 INSERT INTO IsFriendsWith VALUES('Kai81', 'Mia0');
