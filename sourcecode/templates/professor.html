@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block heading %}Professor Information: {{professor.name}}{% endblock %}
+{% block content %}
+    <p><a href= "/home" class = "btn-primary">Home</a></p>
+
+<p>Name: {{professor.name}}</p>
+<p>NetID: {{professor.id}}</p>
+<li><a href="{{url_for('teaches', name=professor.id)}}" class = "btn-secondary"> See {{professor.name}}'s Courses</a></li>
+<a href="/" class = "btn-primary">Logout</a>
+
+
+
+    
+{% endblock %}

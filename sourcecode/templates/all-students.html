@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block heading %}All Students{% endblock %}
+{% block content %}
+    <p><a href= "/home" class = "btn-primary">Home</a></p>
+    <form method="POST" action="/students">
+        {{ form3.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form3.subject.label }}
+
+          {% if form3.subject.errors %}
+            {% for error in form.subject.errors %}
+              <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          {% endif %}
+
+          {{ form3.subject }}
+        </div>
+
+        {{ form3.submit(class="btn-primary") }}
+      </form>
+
+<ul>
+ 	{% for student in students %}
+  	<li><a href="{{url_for('student', id=student.id)}}"> Name = {{student.name}}</a></li>
+  	<li> Student Id = {{student.id}} </li>
+  	<p> </p>
+	{% endfor %}
+	<a href="/" class = "btn-primary">Logout</a>
+
+</ul>
+<hr/>
+
+{% endblock %}

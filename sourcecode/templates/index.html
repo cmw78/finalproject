@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <p><a href= "/home" class = "btn-primary">Home</a></p>
+
+		<main class = "hero-section">
+			<div class = "container">
+				<div class = "section-content">
+					<h2> Rate Your Courses. </h2>
+					<a href = "{{ url_for('signup')}}" class = "btn-primary"> Sign up</a>
+					<a href = "{{ url_for('login')}}" class = "btn-primary"> Login</a>
+				</div>
+
+				<div class = "section-device">
+					<img src = "static/img/duke-university-58.gif">
+				</div>
+
+				<div class = "clearfix"></div>
+
+			</div>
+		</main>
+{% endblock %}

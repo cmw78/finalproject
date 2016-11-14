@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block heading %}Bookbag{% endblock %}
+{% block content %}
+    <p><a href= "/home" class = "btn-primary">Home</a></p>
+
+<ul>
+ 	{% for b in bookbag %}
+  	<li><a href="{{url_for('course', id=b.courseid)}}" class = "btn-secondary"> COURSE ID = {{b.courseid}}</a></li>
+
+  	<p> </p>
+	{% endfor %}
+	<a href="/" class = "btn-primary">Logout</a>
+
+</ul>
+<hr/>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <p><a href= "/home" class = "btn-primary">Home</a></p>
+
+  <main class="container signup-section">
+    <div class="section-content">
+      <h2>Log In</h2>
+
+      <form method="POST" action="/login">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form.netid.label }}
+
+          {% if form.netid.errors %}
+            {% for error in form.netid.errors %}
+              <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          {% endif %}
+
+          {{ form.netid }}
+        </div>
+
+
+
+
+        {{ form.submit(class="btn-primary") }}
+      </form>
+    </div>
+  </main>
+{% endblock %}

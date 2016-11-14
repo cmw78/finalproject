@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block heading %}Courses Taking     <p><a href= "/home" class = "btn-primary">Home</a></p>
+{% endblock %}
+{% block content %}
+
+ 	{% for t in taking %}
+  	 <li><a href="{{url_for('course', id=t.courseid)}}" class = "btn-secondary"> COURSE ID = {{t.courseid}}</a></li>
+
+  	<p> </p>
+	{% endfor %}
+
+<a href="/" class = "btn-primary">Logout</a>
+
+<hr/>
+
+{% endblock %}

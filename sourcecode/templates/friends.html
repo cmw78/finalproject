@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block heading %}All Friends{% endblock %}
+{% block content %}
+    <p><a href= "/home" class = "btn-primary">Home</a></p>
+
+<ul>
+ 	{% for friend in friends %}
+  		<li><a href="{{url_for('student', id=friend.id2)}}" class = "btn-secondary" > See Friend {{friend.id2}}'s Page</a></li>
+
+
+	{% endfor %}
+<a href="/" class = "btn-primary">Logout</a>
+
+
+</ul>
+<hr/>
+
+{% endblock %}

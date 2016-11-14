@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block heading %}All Professors{% endblock %}
+{% block content %}
+    <p><a href= "/home" class = "btn-primary">Home</a></p>
+
+<ul>
+ 	{% for professor in professors %}
+  	<li><a href="{{url_for('professor', id=professor.id)}}" class = "btn-secondary"> {{professor.name}}</a></li>
+  	<p> </p>
+	{% endfor %}
+	<a href="/" class = "btn-primary">Logout</a>
+
+</ul>
+<hr/>
+
+{% endblock %}

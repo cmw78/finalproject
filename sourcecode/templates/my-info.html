@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block heading %}Student Information: {% endblock %}
+{% block content %}
+    <p><a href= "/home" class = "btn-primary">Home</a></p>
+
+<p>NetID: {{id}}</p>
+<li><a href="{{url_for('bookbag', name=id)}}" class = "btn-secondary"> See My Bookbag</a></li>
+<li><a href="{{url_for('taking', name=id)}}" class = "btn-secondary"> See Courses I am Taking </a></li>
+<li><a href="{{url_for('taken', name=id)}}" class = "btn-secondary"> See What Courses I Have Taken</a></li>
+
+<a href="/" class = "btn-primary">Logout</a>
+
+
+
+    
+{% endblock %}

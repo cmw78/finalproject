@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <main class="container signup-section">
+    <div class="section-content">
+      <h2>Create an account</h2>
+
+      <form method="POST" action="/signup">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form.name.label }}
+
+          {% if form.name.errors %}
+            {% for error in form.name.errors %}
+              <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          {% endif %}
+
+          {{ form.name }}
+        </div>
+
+        <div class="form-group">
+          {{ form.netid.label }}
+
+          {% if form.netid.errors %}
+            {% for error in form.netid.errors %}
+              <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          {% endif %}
+
+          {{ form.netid }}
+        </div>
+
+
+        {{ form.submit(class="btn-primary") }}
+      </form>
+    </div>
+  </main>
+{% endblock %}

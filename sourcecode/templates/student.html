@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block heading %}Student Information: {% endblock %}
+{% block content %}
+    <p><a href= "/home" class = "btn-primary">Home</a></p>
+
+<p>Name: {{student.name}}</p>
+<p>NetID: {{student.id}}</p>
+    <p>  <form method="POST" action="/student/{{student.id}}">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form.follow.label(class="btn-primary") }}
+
+          {% if form.follow.errors %}
+            {% for error in form.follow.errors %}
+              <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          {% endif %}
+
+          {{ form.follow }}
+        </div>
+
+        {{ form.submit(class="btn-primary") }}
+      </form>
+  	</p>
+<li><a href="{{url_for('bookbag', name=student.id)}}" class = "btn-secondary"> See {{student.name}}'s Bookbag</a></li>
+<li><a href="{{url_for('taking', name=student.id)}}" class = "btn-secondary"> See What Courses {{student.name}} is Taking</a></li>
+<li><a href="{{url_for('taken', name=student.id)}}" class = "btn-secondary"> See What Courses {{student.name}} Has Taken</a></li>
+
+<a href="/" class = "btn-primary">Logout</a>
+
+
+
+    
+{% endblock %}

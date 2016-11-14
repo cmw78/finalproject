@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block heading %}Search Result: Students{% endblock %}
+{% block content %}
+    <p><a href= "/home" class = "btn-primary">Home</a></p>
+
+ 	{% for s in sub %}
+  	<li><a href="{{url_for('student', id=s.id)}}" class = "btn-secondary"> {{s.name}}, {{s.id}}</a></li>
+  	<p> </p>
+	{% endfor %}
+<a href="/" class = "btn-primary">Logout</a>
+
+<hr/>
+
+{% endblock %}
